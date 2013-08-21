@@ -56,6 +56,8 @@ class Converter(object):
         fin = file(ifname, 'rb')
         r.Read(fin)
 
+        trackname='Track'
+
         #Considering the limited scope of this script, tempo info tracks will be discarded
         for t in r.tracks:
             #identify a playable track
@@ -82,7 +84,7 @@ class Converter(object):
                             w._tracks[i].AddEvent(d, e) 
                         #any else channel event must be copied as is and propagated to the other tracks
                         else:
-                            for i in 0..len(self.w._tracks) - 1:
+                            for i in range(0, len(w._tracks) - 1):
                                 w._tracks[i].AddEvent(d, e)
                     #everything else except track names will be copied to the first track
                     else:
