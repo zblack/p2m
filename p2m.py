@@ -21,7 +21,9 @@ class Voices(object):
     
     #looks for an empty slot, if not found allocates a new track
     #returns the slot number
-    def NoteOn(self, d, note, w):
+    def NoteOn(self, note, velocity, w):
+        if velocity == 0:
+            NoteOff(note)
         try:
             i = self.SlotOf(0)
         except:
@@ -72,7 +74,7 @@ class Converter(object):
                     #voice specific events
                     if isinstance(e, ChannelEvent):
                         if isinstance(e, NoteOnEvent):
-                            i = self.v.NoteOn(d, e.note, w)
+                            i = self.v.NoteOn(e.note, e.velocity, w)
                             #a bit unfair, but had not choice
                             w._tracks[i].AddEvent(d, e) 
                         elif isinstance(e, NoteOffEvent):
