@@ -8,7 +8,7 @@ Installation:
 
 - get python if not already present (try "python" at command line) 
 http://www.python.org/download/
-I used 2.6, chances are it may work with others, likely not 3.X though.
+I used python 2.7, chances are it may work with others, likely not 3.X though.
 
 - get this mighty library from pichenettes' git 
 https://raw.github.com/pichenettes/avril-firmware_tools/master/midi/midifile.py
@@ -21,11 +21,13 @@ https://raw.github.com/zblack/p2m/master/p2m.py
 put the two saved files in a proper folder where you plan to do conversions.
 
 ---------------------------------------------------------
-Usage:
+Usage: python p2m.py -i inputfilename -s splitnote
 
-python p2m.py -i somefilename.mid
+Example: python p2m.py -i somefilename.mid -s C#4
 
 it will create a new file called somefilename_multi.mid
+splitnote: format noteletter+octave number, if specified, notes belonging to separated split zones
+will be allocated into separated track groups ("A","B").
 
 ---------------------------------------------------------
 Tipical workflow:
@@ -35,6 +37,7 @@ Tipical workflow:
 - reimport the new "multi" midi file into the DAW software, if asked to merge tracks say no because it will make this procedure perfectly useless.
 - create as many mono audio tracks as the midi tracks you just imported.
 - one track at a time render the midi using the outboard gear (solo and play one midi track while recording to a soloed audio track at a time).
+- when using split parameter, tracks of A group might be rendered with a different instrument than B.
 - optional: route the audio tracks generated to a submix fader using some panning to give spatiality.
 
-I made very little test, chances are not all cases covered, just let me know and I can eventually fix bugs.
+Not thoroughly tested.
